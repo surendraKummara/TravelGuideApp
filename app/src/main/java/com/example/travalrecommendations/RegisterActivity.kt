@@ -1,6 +1,9 @@
 package com.example.travalrecommendations
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
@@ -27,12 +30,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.database.FirebaseDatabase
 
 class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +49,12 @@ class RegisterActivity : AppCompatActivity() {
 @Composable
 fun RegisterScreen()
 {
+    var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var fullName by remember { mutableStateOf("") }
+    var city by remember { mutableStateOf("") }
+
+    val context = LocalContext.current as Activity
 
     Column(
         modifier = Modifier
@@ -85,8 +95,8 @@ fun RegisterScreen()
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp),
-            value = password,
-            onValueChange = { password = it },
+            value = fullName,
+            onValueChange = { fullName = it },
             label = { Text("Full Name") },
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = Color.White,
@@ -100,8 +110,8 @@ fun RegisterScreen()
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp),
-            value = password,
-            onValueChange = { password = it },
+            value = email,
+            onValueChange = { email = it },
             label = { Text("Email") },
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = Color.White,
@@ -115,8 +125,8 @@ fun RegisterScreen()
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp),
-            value = password,
-            onValueChange = { password = it },
+            value = city,
+            onValueChange = { city = it },
             label = { Text("City") },
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = Color.White,
@@ -144,6 +154,39 @@ fun RegisterScreen()
 
         Text(
             modifier = Modifier
+                .clickable {
+
+                    when {
+                        fullName.isEmpty() -> {
+//                            Toast.makeText(context, " Please Enter Name", Toast.LENGTH_SHORT).show()
+                        }
+
+                        email.isEmpty() -> {
+//                            Toast.makeText(context, " Please Enter Mail", Toast.LENGTH_SHORT)
+//                                .show()
+                        }
+                        city.isEmpty() -> {
+//                            Toast.makeText(context, " Please Enter city", Toast.LENGTH_SHORT)
+//                                .show()
+                        }
+                        password.isEmpty() -> {
+//                            Toast.makeText(context, " Please Enter Password", Toast.LENGTH_SHORT)
+//                                .show()
+                        }
+
+
+                        else -> {
+                            val travelerDetails = TravelerDetails(
+                                email,
+                                fullName,
+                                city,
+                                password
+                            )
+                            registerUser(travelerDetails,context);
+                        }
+
+                    }
+                }
                 .width(180.dp)
                 .padding(end = 24.dp)
                 .background(
@@ -169,6 +212,44 @@ fun RegisterScreen()
     }
 
 }
+
+
+fun registerUser(travelerDetails: TravelerDetails, context: Context) {
+
+    val firebaseDatabase = FirebaseDatabase.getInstance()
+    val databaseReference = firebaseDatabase.getReference("TravelerDetails")
+
+    databaseReference.child(travelerDetails.emailid.replace(".", ","))
+        .setValue(travelerDetails)
+        .addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Toast.makeText(context, "You Registered Successfully", Toast.LENGTH_SHORT)
+                    .show()
+
+            } else {
+                Toast.makeText(
+                    context,
+                    "Registration Failed",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        .addOnFailureListener { _ ->
+            Toast.makeText(
+                context,
+                "Something went wrong",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+}
+
+data class TravelerDetails(
+    var name : String = "",
+    var emailid : String = "",
+    var city : String = "",
+    var password: String = ""
+)
+
 
 @Preview(showBackground = true)
 @Composable

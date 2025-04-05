@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "461704867212",
+    "project_id": "travelrecommendation-3da4e",
+    "storage_bucket": "travelrecommendation-3da4e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:461704867212:android:2174cc3740578c0d897aa9",
+        "android_client_info": {
+          "package_name": "com.example.travalrecommendations"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzl7LA9dfVtL143V8tb9acxDQ7dJzP7Vc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

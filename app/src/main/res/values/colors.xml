@@ -10,5 +10,10 @@
 
     <color name="bt_color">#7695ff</color>
 
+    <color name="SkyBlue">#E91E63</color>
+    <color name="PureWhite">#FFFFFF</color>
+
+    <color name="white_50">#80FFFFFF</color>
+
 
 </resources>
