@@ -1,15 +1,21 @@
 package com.example.travalrecommendations
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,85 +26,96 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.travalrecommendations.ui.theme.TravalRecommendationsTheme
-import kotlinx.coroutines.delay
-
-
-
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.travalrecommendations.ui.theme.TravalRecommendationsTheme
 import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LoadingScreenCheck()
+            StartUpViewScreen(::navigationLogic)
         }
     }
 
+    private fun navigationLogic(navigationValue: Int) {
+
+        when (navigationValue) {
+            1 -> {
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            }
+
+        }
+    }
 }
 
 @Composable
-fun LoadingScreenCheck() {
-    var showSplash by remember { mutableStateOf(true) }
-    val context = LocalContext.current as Activity
+fun StartUpViewScreen(navigationLogic: (navigationValue: Int) -> Unit) {
+    var canSplash by remember { mutableStateOf(true) }
 
     LaunchedEffect(Unit) {
         delay(3000)
-        showSplash = false
+        canSplash = false
     }
 
-    if (showSplash) {
-        LoadingScreen()
-
+    if (canSplash) {
+        StartUpView()
     } else {
-
-            context.startActivity(Intent(context, LoginActivity::class.java))
-            context.finish()
-
+        navigationLogic.invoke(1)
     }
 }
 
 @Composable
-fun LoadingScreen() {
+fun StartUpView() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = colorResource(id = R.color.SkyBlue)),
+            .background(color = Color.White),
         contentAlignment = Alignment.Center
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
 
-            Spacer(modifier = Modifier.weight(1f))
-
-
-            Image(
-                painter = painterResource(id = R.drawable.iv_airplane),
-                contentDescription = "Travel Recommendations",
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
             )
+            {
 
-            Spacer(modifier = Modifier.weight(1f))
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(color = Color.Transparent),
+                )
+                {
+                    Image(
+                        modifier = Modifier.align(Alignment.CenterHorizontally),
+                        painter = painterResource(id = R.drawable.travel_icon),
+                        contentDescription = "Travel Recommendation App",
+                    )
+
+                    Spacer(modifier = Modifier.height(6.dp))
+
+                    Text(
+                        text = "Travel Recommendation App\nby Surendra Kummar",
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFF64A70B), // Green color similar to the design
+                        fontSize = 26.sp,
+                        style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
+                        modifier = Modifier.align(Alignment.CenterHorizontally),
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
 
 
         }

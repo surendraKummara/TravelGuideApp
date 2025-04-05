@@ -2,8 +2,11 @@ package com.example.travalrecommendations
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
@@ -30,18 +33,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.firebase.database.FirebaseDatabase
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContent{
+            RegisterScreen()
+        }
     }
 }
 
@@ -80,6 +84,8 @@ fun RegisterScreen()
             Text(
                 modifier = Modifier
                     .clickable {
+                        context.startActivity(Intent(context, LoginActivity::class.java))
+                        context.finish()
                     },
                 text = "Login",
                 textAlign = TextAlign.Center,
@@ -177,8 +183,8 @@ fun RegisterScreen()
 
                         else -> {
                             val travelerDetails = TravelerDetails(
-                                email,
                                 fullName,
+                                email,
                                 city,
                                 password
                             )

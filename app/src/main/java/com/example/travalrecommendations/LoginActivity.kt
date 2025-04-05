@@ -2,8 +2,11 @@ package com.example.travalrecommendations
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
@@ -42,9 +45,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.database.FirebaseDatabase
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContent{
+            LoginScreen()
+        }
     }
 }
 
@@ -80,6 +86,8 @@ fun LoginScreen()
             Text(
                 modifier = Modifier
                     .clickable {
+                        context.startActivity(Intent(context, RegisterActivity::class.java))
+                        context.finish()
                     },
                 text = "Sign Up",
                 textAlign = TextAlign.Center,
@@ -134,14 +142,14 @@ fun LoginScreen()
                         }
 
                         else -> {
-                            val posterDetails = TravelerDetails(
+                            val travelerDetails = TravelerDetails(
                                 "",
                                 email,
                                 "",
                                 password
                             )
 
-                            loginUser(posterDetails,context)
+                            loginUser(travelerDetails,context)
                         }
 
                     }
