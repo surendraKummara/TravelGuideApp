@@ -113,7 +113,7 @@ fun TravelGuide(bgImage: Int, title: String, onClick: (title: String) -> Unit) {
 @Composable
 fun TravelDashboardScreen() {
 
-//    val context = LocalContext.current as Activity
+    val context = LocalContext.current as Activity
 
     Column(modifier = Modifier.fillMaxSize()) {
 
@@ -157,6 +157,7 @@ fun TravelDashboardScreen() {
             bgImage = R.drawable.iv_travel_recommendations,
             title = "Create Travel Plan",
             onClick = {
+                context.startActivity(Intent(context, PlanTripActivity::class.java))
             }
         )
         TravelGuide(
