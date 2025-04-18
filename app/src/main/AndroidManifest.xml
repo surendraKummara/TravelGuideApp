@@ -13,6 +13,9 @@
         android:theme="@style/Theme.TravalRecommendations"
         tools:targetApi="31">
         <activity
+            android:name=".SearchDestinationActivity"
+            android:exported="false" />
+        <activity
             android:name=".PlanTripActivity"
             android:exported="false" />
         <activity
