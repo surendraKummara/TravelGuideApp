@@ -133,12 +133,12 @@ fun LoginScreen()
                 .clickable {
                     when {
                         email.isEmpty() -> {
-//                            Toast.makeText(context, " Please Enter Mail", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, " Please Enter Mail", Toast.LENGTH_SHORT).show()
                         }
 
                         password.isEmpty() -> {
-//                            Toast.makeText(context, " Please Enter Password", Toast.LENGTH_SHORT)
-//                                .show()
+                            Toast.makeText(context, " Please Enter Password", Toast.LENGTH_SHORT)
+                                .show()
                         }
 
                         else -> {
@@ -188,11 +188,18 @@ fun loginUser(travelerDetails: TravelerDetails, context: Context) {
 
     databaseReference.get().addOnCompleteListener { task ->
         if (task.isSuccessful) {
-            val donorData = task.result?.getValue(TravelerDetails::class.java)
-            if (donorData != null) {
-                if (donorData.password == travelerDetails.password) {
+            val travelData  = task.result?.getValue(TravelerDetails::class.java)
+            if (travelData != null) {
+                if (travelData.password == travelerDetails.password) {
+
+                    TravalRecommendationData.writeLS(context, true)
+                    TravalRecommendationData.writeMail(context, travelData.emailid)
+                    TravalRecommendationData.writeUserName(context, travelData.name)
 
                     Toast.makeText(context, "Login Sucessfully", Toast.LENGTH_SHORT).show()
+
+                    context.startActivity(Intent(context, TravelDashboardActivity::class.java))
+                    (context as Activity) .finish()
 
                 } else {
                     Toast.makeText(context, "Seems Incorrect Credentials", Toast.LENGTH_SHORT).show()

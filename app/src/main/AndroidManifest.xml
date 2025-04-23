@@ -13,6 +13,21 @@
         android:theme="@style/Theme.TravalRecommendations"
         tools:targetApi="31">
         <activity
+            android:name=".PlaceLocationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReviewsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewHostelsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PlaceDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SearchResultActivity"
+            android:exported="false" />
+        <activity
             android:name=".SearchDestinationActivity"
             android:exported="false" />
         <activity
@@ -38,6 +53,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBbjh-tqqnt6bChHRv8ZI9wY0R9w5Z_MSI" />
     </application>
 
 </manifest>

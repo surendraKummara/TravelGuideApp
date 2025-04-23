@@ -169,9 +169,9 @@ fun TravelDashboardScreen() {
         )
         TravelGuide(
             bgImage = R.drawable.iv_travel_recommendations,
-            title = "Trips Summary",
+            title = "Reviews",
             onClick = {
-
+                context.startActivity(Intent(context, ReviewsActivity::class.java))
             }
         )
         TravelGuide(

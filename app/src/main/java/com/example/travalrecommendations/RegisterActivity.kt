@@ -166,20 +166,20 @@ fun RegisterScreen()
 
                     when {
                         fullName.isEmpty() -> {
-//                            Toast.makeText(context, " Please Enter Name", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, " Please Enter Name", Toast.LENGTH_SHORT).show()
                         }
 
                         email.isEmpty() -> {
-//                            Toast.makeText(context, " Please Enter Mail", Toast.LENGTH_SHORT)
-//                                .show()
+                            Toast.makeText(context, " Please Enter Mail", Toast.LENGTH_SHORT)
+                                .show()
                         }
                         city.isEmpty() -> {
-//                            Toast.makeText(context, " Please Enter city", Toast.LENGTH_SHORT)
-//                                .show()
+                            Toast.makeText(context, " Please Enter city", Toast.LENGTH_SHORT)
+                                .show()
                         }
                         password.isEmpty() -> {
-//                            Toast.makeText(context, " Please Enter Password", Toast.LENGTH_SHORT)
-//                                .show()
+                            Toast.makeText(context, " Please Enter Password", Toast.LENGTH_SHORT)
+                                .show()
                         }
 
 
@@ -233,6 +233,9 @@ fun registerUser(travelerDetails: TravelerDetails, context: Context) {
             if (task.isSuccessful) {
                 Toast.makeText(context, "You Registered Successfully", Toast.LENGTH_SHORT)
                     .show()
+
+                context.startActivity(Intent(context, LoginActivity::class.java))
+                (context as Activity).finish()
 
             } else {
                 Toast.makeText(
