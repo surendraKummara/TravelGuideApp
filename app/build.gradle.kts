@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.travalrecommendations"
+    namespace = "surendraKummara.s3287724.travalrecommendations"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.travalrecommendations"
+        applicationId = "surendraKummara.s3287724.travalrecommendations"
         minSdk = 24
         targetSdk = 35
         versionCode = 1

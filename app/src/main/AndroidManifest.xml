@@ -6,44 +6,53 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/travel_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/travel_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.TravalRecommendations"
         tools:targetApi="31">
         <activity
-            android:name=".PlaceLocationActivity"
+            android:name="surendraKummara.s3287724.travalrecommendations.SavedPlansActivity"
             android:exported="false" />
         <activity
-            android:name=".ReviewsActivity"
+            android:name="surendraKummara.s3287724.travalrecommendations.AboutUsActivity"
             android:exported="false" />
         <activity
-            android:name=".ViewHostelsActivity"
+            android:name="surendraKummara.s3287724.travalrecommendations.ManageProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".PlaceDetailsActivity"
+            android:name="surendraKummara.s3287724.travalrecommendations.PlaceLocationActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchResultActivity"
+            android:name="surendraKummara.s3287724.travalrecommendations.ReviewsActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchDestinationActivity"
+            android:name="surendraKummara.s3287724.travalrecommendations.ViewHostelsActivity"
             android:exported="false" />
         <activity
-            android:name=".PlanTripActivity"
+            android:name="surendraKummara.s3287724.travalrecommendations.PlaceDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".TravelDashboardActivity"
+            android:name="surendraKummara.s3287724.travalrecommendations.SearchResultActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name="surendraKummara.s3287724.travalrecommendations.SearchDestinationActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name="surendraKummara.s3287724.travalrecommendations.PlanTripActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="surendraKummara.s3287724.travalrecommendations.TravelDashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name="surendraKummara.s3287724.travalrecommendations.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name="surendraKummara.s3287724.travalrecommendations.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name="surendraKummara.s3287724.travalrecommendations.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.TravalRecommendations">
